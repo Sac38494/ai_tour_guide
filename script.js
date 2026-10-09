@@ -30,7 +30,7 @@ function clock(){$("clock").textContent=new Date().toLocaleTimeString([],{hour:"
 /* nearby dashboard */
 var cats=[["🏛","Tourist Places","Landmarks and attractions","tourist attractions"],["🏥","Hospital","Medical facilities","hospital"],["🏧","ATM","Cash withdrawal","ATM"],["💊","Pharmacy","Medicine stores","pharmacy"],["🍽","Restaurants & Cafes","Food and drink","restaurants and cafes"],["🏨","Hotels","Places to stay","hotels"],["⛽","Petrol Pump","Fuel stations","petrol pump"],["🚻","Public Toilets","Restrooms","public toilet"],["🚌","Bus Station","Stops and terminals","bus station"],["🚇","Metro Station","Metro access","metro station"],["🛍","Markets","Shopping areas","market"],["📷","Photo Spots","Viewpoints","photography spots"],["🛒","Grocery","Daily-use stores","grocery store"],["🚨","Emergency Services","Police and hospitals","emergency services"]];
 function tile(i,t,d,fn){var b=el("button","tile");b.type="button";b.appendChild(el("span",null,i));b.appendChild(el("b",null,t));if(d)b.appendChild(el("small",null,d));b.onclick=fn;return b}
-function recent(l){var r=store("tg-recent")||[];if(l&&r.indexOf(l)<0){r.unshift(l);store("tg-recent",r.slice(0,5))}}
+function recent(l){var r=store("tg-recent-v2")||[];if(l&&r.indexOf(l)<0){r.unshift(l);store("tg-recent-v2",r.slice(0,5))}}
 function search(name,q){
   var l=loc();if(!l){toast("Enter a location or use GPS first.");$("loc").focus();return}
   if(!coords)recent(l);
@@ -50,7 +50,7 @@ $("geo").onclick=function(){
 };
 
 /* itinerary + time */
-var pools={history:["Historical monument","Museum","Heritage walk area","Old city market","Sunset viewpoint","Local temple or mosque"],nature:["Park or garden","Lake or riverfront","Nature trail","Botanical garden","Sunset viewpoint","Open green space"],photo:["Landmark viewpoint","Street photography lane","Park or garden","Riverfront","Sunset viewpoint","Colourful market"],shop:["Local market","Handicraft emporium","Shopping street","Street-food lane","Shopping mall","Bookshop area"],food:["Famous local eatery","Street-food lane","Cafe","Sweet shop","Dessert spot","Food market"]};
+var pools={history:["Sarnath","Sarnath Museum","Heritage walk area","Godowlia Market","Sunset viewpoint","Viswanath Mandir"],nature:["Park or garden","Lake or riverfront","Nature trail","Botanical garden","Sunset viewpoint","Open green space"],photo:["Landmark viewpoint","Street photography lane","Park or garden","Riverfront","Sunset viewpoint","Colourful market"],shop:["Local market","Handicraft emporium","Shopping street","Street-food lane","Shopping mall","Bookshop area"],food:["Famous local eatery","Street-food lane","Cafe","Sweet shop","Dessert spot","Food market"]};
 function fm(m){var d=m>=1440,h=Math.floor(m/60)%24,mi=Math.round(m%60),a=h>=12?"PM":"AM";return (h%12||12)+":"+(mi<10?"0":"")+mi+" "+a+(d?" (+1 day)":"")}
 function dur(m){var h=Math.floor(m/60);return (h?h+"h ":"")+(m%60)+"m"}
 function makePlan(){
@@ -81,12 +81,12 @@ function renderPlan(p){
     li.appendChild(el("div","small",x.why));li.appendChild(link(mapQ(x.q),"Search in Maps","small"));ol.appendChild(li)});
   o.appendChild(ol);
   o.appendChild(el("p","muted small","Estimates only: travel times are entered by you, not calculated from traffic or routing data. Stops are demo suggestions."));
-  var r=el("div","row");[["Regenerate Plan",function(){$("pf").requestSubmit()}],["Save Itinerary",function(){store("tg-plan",p);toast("Itinerary saved on this device")}],["Print Trip Plan",function(){print()}],["Delete Saved",function(){store("tg-plan",null);toast("Saved itinerary deleted")}]].forEach(function(b){var bt=el("button","ghost",b[0]);bt.type="button";bt.onclick=b[1];r.appendChild(bt)});o.appendChild(r);
+  var r=el("div","row");[["Regenerate Plan",function(){$("pf").requestSubmit()}],["Save Itinerary",function(){store("tg-plan-v2",p);toast("Itinerary saved on this device")}],["Print Trip Plan",function(){print()}],["Delete Saved",function(){store("tg-plan-v2",null);toast("Saved itinerary deleted")}]].forEach(function(b){var bt=el("button","ghost",b[0]);bt.type="button";bt.onclick=b[1];r.appendChild(bt)});o.appendChild(r);
 }
 $("pf").onsubmit=function(e){e.preventDefault();var p=makePlan();if(p){renderPlan(p);toast("Plan created")}};
-$("pload").onclick=function(){fill({pc:"New Delhi",ps:"09:00",ph:6,pm:0,pv:50,pt:20,pb:40,px:6,pi:"history",pr:"Public Transport"});$("pf").requestSubmit()};
+$("pload").onclick=function(){fill({pc:"Varanasi",ps:"09:00",ph:6,pm:0,pv:50,pt:20,pb:40,px:6,pi:"history",pr:"Public Transport"});$("pf").requestSubmit()};
 $("preset").onclick=function(){$("pf").reset();var o=$("pout");clear(o);o.appendChild(el("p","muted","No plan yet. Fill the form or load demo data."))};
-var sp=store("tg-plan");if(sp&&sp.items)renderPlan(sp);
+var sp=store("tg-plan-v2");if(sp&&sp.items)renderPlan(sp);
 
 /* budget */
 var split={e:[25,25,25,10,5,10],s:[20,30,25,10,5,10],p:[15,40,20,10,5,10]},bn=["Transport","Accommodation","Food","Activities & tickets","Shopping","Emergency reserve"];
@@ -134,10 +134,10 @@ $("lg").onchange=function(){ldraw()};ldraw();
 
 /* demo */
 function demo(){
-  toast("Loading demo for Connaught Place, New Delhi…");
-  $("loc").value="Connaught Place, New Delhi";coords=null;$("hq").value=$("loc").value;recent($("loc").value);
+  toast("Loading demo for Godowlia Chowk, Varanasi…");
+  $("loc").value="Godowlia Chowk, Varanasi";coords=null;$("hq").value=$("loc").value;recent($("loc").value);
   $("pload").click();$("bload").click();
-  $("rs").value="Connaught Place, New Delhi";dests=["India Gate","Humayun's Tomb","Lodhi Garden"];rdraw();$("rgo").click();
+  $("rs").value="Godowlia Chowk, Varanasi";dests=["Kashi Vishwanath Temple","Dashashwamedh Ghat","Assi Ghat"];rdraw();$("rgo").click();
   search("Hospital","hospital");$("lg").value="hi";ldraw(2);
   $("planner").scrollIntoView();
   setTimeout(function(){toast("Demo loaded: plan, budget (₹5,000), route, Maps links and Hindi phrase")},1800);
