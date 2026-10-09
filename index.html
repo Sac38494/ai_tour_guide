@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tour Guider – Explore More. Plan Smarter.</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i class="o o1"></i><i class="o o2"></i><i class="o o3"></i><i class="o o4"></i></div>
+<header id="top"><nav aria-label="Main">
+<a class="logo" href="#home"><span>◎</span> Tour Guider</a>
+<button id="mb" aria-label="Menu" aria-expanded="false">☰</button>
+<ul id="nl">
+<li><a href="#home">Home</a></li><li><a href="#nearby">Explore Nearby</a></li><li><a href="#planner">Time Planner</a></li><li><a href="#budget">Budget</a></li><li><a href="#route">Route</a></li><li><a href="#photo">Photo Spots</a></li><li><a href="#emergency">Emergency</a></li><li><a href="#lang">Language</a></li>
+</ul>
+<button id="th" class="ghost" aria-label="Toggle dark mode">🌙</button>
+<button id="demoNav" class="btn sm">Try Live Demo</button>
+</nav></header>
+
+<main>
+<section id="home" class="hero">
+<div class="wrap two">
+<div class="rv">
+<span class="badge">YOUR SMART TRAVEL COMPANION</span>
+<h1>Explore More. Plan Smarter.</h1>
+<p class="lead">Find places, organise your day, manage time and control spending, all in one place.</p>
+<div class="search"><span>🔍</span><label class="sr" for="hq">Location</label><input id="hq" placeholder="Enter a city or area"><button id="hgo" class="btn">Start Exploring</button></div>
+<div class="row"><button id="demoHero" class="ghost">▶ Try Live Demo</button><span class="muted">Discover · Plan · Explore</span></div>
+<p class="muted small">Local time: <b id="clock">--:--</b> (your browser clock)</p>
+</div>
+<div class="art rv" aria-hidden="true">
+<svg viewBox="0 0 360 300"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bfe8dc"/><stop offset="1" stop-color="#d9d3f3"/></linearGradient></defs>
+<rect width="360" height="300" rx="28" fill="url(#g)"/>
+<path d="M0 220 Q90 160 180 215 T360 190 V300 H0Z" fill="#8cc7b5" opacity=".7"/>
+<path d="M0 255 Q120 205 220 250 T360 235 V300 H0Z" fill="#0e7c6b" opacity=".55"/>
+<circle cx="280" cy="70" r="26" fill="#f6d98a"/>
+<path d="M50 120 C120 40 190 190 300 130" stroke="#0e7c6b" stroke-width="3" stroke-dasharray="7 8" fill="none"/>
+<g class="pin"><path d="M180 140 a22 22 0 1 1 .1 0 L180 185Z" fill="#e0866a"/><circle cx="180" cy="118" r="8" fill="#fff"/></g>
+</svg>
+<div class="fc c1">🏛 Landmarks</div><div class="fc c2">🏥 Hospitals</div><div class="fc c3">₹ Budget</div>
+</div></div>
+</section>
+
+<section id="nearby" class="wrap rv">
+<h2>Explore Nearby</h2>
+<p class="muted">Enter a location or use GPS, pick a category and Google Maps opens with the search. Tour Guider does not list businesses itself.</p>
+<div class="card">
+<div class="row"><div class="grow"><label for="loc">Location</label><input id="loc" placeholder="e.g. Connaught Place, New Delhi"></div>
+<button id="geo" class="ghost">📍 Use My Current Location</button></div>
+<p id="geoMsg" class="muted small" role="status"></p>
+<div id="dash" class="grid"></div>
+<div id="res" class="result" aria-live="polite"><p class="muted">Pick a category to generate a Maps link.</p></div>
+</div>
+</section>
+
+<section id="planner" class="wrap rv">
+<h2>Time Planner &amp; Itinerary</h2>
+<p class="muted">Calculates how many stops fit in your time. Stop names are demo suggestions by category, not verified places.</p>
+<div class="card"><form id="pf" class="fg">
+<div><label for="pc">City / area</label><input id="pc" placeholder="City"></div>
+<div><label for="ps">Start time</label><input id="ps" type="time" value="09:00"></div>
+<div><label for="ph">Hours</label><input id="ph" type="number" min="0" max="48" value="6"></div>
+<div><label for="pm">Minutes</label><input id="pm" type="number" min="0" max="59" value="0"></div>
+<div><label for="pv">Minutes per stop</label><input id="pv" type="number" min="5" max="300" value="50"></div>
+<div><label for="pt">Travel between stops (min)</label><input id="pt" type="number" min="0" max="180" value="20"></div>
+<div><label for="pb">Meal break (min)</label><input id="pb" type="number" min="0" max="180" value="40"></div>
+<div><label for="px">Max stops</label><input id="px" type="number" min="1" max="10" value="6"></div>
+<div><label for="pi">Interest</label><select id="pi"><option value="history">History</option><option value="nature">Nature</option><option value="photo">Photography</option><option value="shop">Shopping</option><option value="food">Food</option></select></div>
+<div><label for="pr">Transport</label><select id="pr"><option>Walking</option><option>Public Transport</option><option>Driving</option></select></div>
+<div class="full row"><button class="btn">Create My Plan</button><button type="button" id="pload" class="ghost">Load Demo Data</button><button type="button" id="preset" class="ghost">Reset</button></div>
+</form>
+<div id="pout" aria-live="polite"><p class="muted">No plan yet. Fill the form or load demo data.</p></div>
+</div></section>
+
+<section id="budget" class="wrap rv">
+<h2>Budget Planner</h2>
+<p class="muted">Splits your budget by travel style. Figures are estimates, not local prices.</p>
+<div class="card"><form id="bf" class="fg">
+<div><label for="ba">Total budget (₹)</label><input id="ba" type="number" min="1" value="5000"></div>
+<div><label for="bt">Travelers</label><input id="bt" type="number" min="1" max="50" value="2"></div>
+<div><label for="bd">Days</label><input id="bd" type="number" min="1" max="60" value="2"></div>
+<div><label for="bs">Style</label><select id="bs"><option value="e">Economy</option><option value="s" selected>Standard</option><option value="p">Premium</option></select></div>
+<div class="full row"><button class="btn">Plan Budget</button><button type="button" id="bload" class="ghost">Load Demo Data</button></div>
+</form><div id="bout" aria-live="polite"><p class="muted">Enter values to see the breakdown.</p></div></div>
+</section>
+
+<section id="route" class="wrap rv">
+<h2>Route Planner</h2>
+<p class="muted">Your order is a proposed route, not the shortest one. Distance and traffic come from Google Maps.</p>
+<div class="card">
+<div class="fg"><div><label for="rs">Starting point</label><input id="rs"></div>
+<div><label for="rm">Travel mode</label><select id="rm"><option value="driving">Driving</option><option value="walking">Walking</option><option value="transit">Public transport</option></select></div></div>
+<div id="rd"></div>
+<div class="row"><button id="radd" class="ghost">+ Add destination</button><button id="rgo" class="btn">Create Route</button><button id="rreset" class="ghost">Reset</button></div>
+<div id="rout" aria-live="polite"></div>
+</div></section>
+
+<section id="photo" class="wrap rv">
+<h2>Photo Spots</h2>
+<p class="muted">Uses the location from Explore Nearby. Suggested times are general guidance.</p>
+<div id="pg" class="grid"></div>
+</section>
+
+<section id="emergency" class="wrap rv">
+<div class="card alert"><h2>Emergency Assistant</h2>
+<p>Maps results and availability must be verified by you. Tour Guider cannot confirm that a place is open or nearest. In an emergency, call your local emergency number.</p>
+<div id="eg" class="grid big"></div></div>
+</section>
+
+<section id="lang" class="wrap rv">
+<h2>Local Language Assistant</h2>
+<p class="muted">Static phrases with transliteration. They are not live translation; check pronunciation locally.</p>
+<div class="card"><label for="lg">Language</label>
+<select id="lg"><option value="hi">Hindi</option><option value="bn">Bengali</option><option value="ta">Tamil</option><option value="mr">Marathi</option></select>
+<div id="pl" class="plist"></div></div>
+</section>
+</main>
+
+<footer><div class="wrap"><b>◎ Tour Guider</b> <span class="muted">Academic Project — 2026</span>
+<p class="muted small">Discover · Plan · Time · Budget · Route · Photos · Emergency · Phrases</p>
+<p class="muted small">Budget and itinerary figures are illustrative estimates. Actual conditions, prices and travel times may differ.</p></div></footer>
+<div id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
